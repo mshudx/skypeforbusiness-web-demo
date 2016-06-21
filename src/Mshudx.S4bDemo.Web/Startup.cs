@@ -22,7 +22,7 @@ namespace Mshudx.S4bDemo.Web
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-				.AddJsonFile("secrets.json", optional: true, reloadOnChange: true);
+                .AddJsonFile("secrets.json", optional: true, reloadOnChange: true);
 
             if (env.IsDevelopment())
             {

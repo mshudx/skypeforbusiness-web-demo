@@ -1,7 +1,6 @@
 ﻿var client;
 $(function () {
     'use strict';
-    var client;
     function onChanged(name, newState, reason, oldState) {
         console.log(name + ': %c' + oldState + ' -> ' + newState, 'color:green;font-weight:bold', 'Reason: ', reason);
     }
@@ -29,7 +28,7 @@ $(function () {
             name: $('#name').val(),
             meeting: $('#meetingUri').val()
         }).then(function () {
-            alert('Signed in as: ' + client.personsAndGroupsManager.mePerson.displayName());
+            console.log('Signed in as: ' + client.personsAndGroupsManager.mePerson.displayName());
             $("#sign-in").addClass("disable");
             var addedListener = client.conversationsManager.conversations.added(function (conversation) {
                 var chatService, audioService, videoService;
