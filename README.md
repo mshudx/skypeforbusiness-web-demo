@@ -1,6 +1,47 @@
 # About
 This sample ASP.NET Core Web App shows how to develop a Skype Web SDK client application for Skype for Business Online.
 
+# Currently supported browsers
+
+* IE 10+ (Skype for Business Onprem)
+* IE 11 (Skype for Business Online)
+* Safari 8+
+* Firefox 40+ (non Audio Video functionality)
+* Chrome 43+ (non Audio Video functionality)
+* Microsoft Edge
+
+# How-to setup your dev environment
+To run this sample you will need:
+
+* [.NET Core & .NET Core SDK RC2 releases](https://www.microsoft.com/net/download)
+* [ASP.NET Core RC2 release](https://blogs.msdn.microsoft.com/webdev/2016/05/16/announcing-asp-net-core-rc2/)
+* [Visual Studio 2015 Update 2](https://www.visualstudio.com/en-us/downloads/visual-studio-2015-downloads-vs.aspx)
+* An Azure subscription (a free trial is sufficient)
+* An Office365 subscription (a free trial is sufficient)
+
+## Step-by-step guide
+
+[ ] Fork and clone or download this repository
+[ ] Obtain API key from the official documentation
+[ ] Register your APP in Azure AD 
+[ ] Configure your app for OAuth implicit grant flow
+[ ] Provide consent for all users in the Azure AD tenant
+[ ] Configure your application
+
+# Configure the application
+
+1. Open the solution in **Visual Studio 2015**
+2. Open `appsettings.json` file
+3. Find the `Authentication:AzureAd:ClientId` and replace the value with the **CLIENT ID** from the [Azure portal Active Directory extension](https://manage.windowsazure.com/@scaleddomains.com#Workspaces/ActiveDirectoryExtension).
+4. Find the `Authentication:AzureAd:ClientSecret` and replace the value with a key created for the application in the Azure AD tenant. Under the Keys section, select either a 1 year or 2 year key - the keyValue will be displayed after you save the configuration at the end.
+5. Replace the value of the `Authentication:AzureAd:AADInstance` setting with your Azure AD Tenant's domain name e.g. `contoso.onmicrosoft.com`
+6. Set the value of `SkypeForBusiness:Version` to a specific value to your app, eg. `s4bdemo/0.0.1`
+7. Set the Skype Web SDK API keys
+
+# Skype Web SDK Production Use Capabilities & API keys
+For the API product keys and the supported capabilitites please check the [Official documentation](https://msdn.microsoft.com/en-us/skype/websdk/apiproductkeys).
+> This sample requires features that are available only in the **Public Preview (PP)** API version!
+
 # App registration
 Skype for Business Online uses Azure Active Directory (Azure AD) to provide authentication services that your application can 
 use to obtain rights to access the service APIs. To accomplish this, your application needs to perform the following steps:
@@ -42,13 +83,14 @@ The **Skype for Business Online** permissions are tenant administrator consent o
 For an app to be used by all users of an O365 tenant, a tenant administrator must provide consent. 
 To provide consent for all users in the tenant, construct the following URL for your app as shown in the example below:
 
-1. Replace `<<clientid>>` query parameter in the URL with the GUID obtained from Azure app registration.
-2. Replace `<<redirecturi>>` query parameter in the URL with a valid location in the current site.
-3. Execute the URL in your browser
 
 ```
 https://login.microsoftonline.com/common/oauth2/authorize?response_type=id_token&client_id=<<clientid>>&redirect_uri=<<redirecturi>>&response_mode=form_post&nonce=a4014117-28aa-47ec-abfb-f377be1d3cf5&resource=https://webdir.online.lync.com&prompt=admin_consent
 ```
+
+> Note: Update the client Id and redirect Uri for your app.
+
+Access the URL and authenticate using **tenant administrator credentials** and **accept the application permissions**. Users will now be able to access the application.
 
 # Development Tips&Tricks
 
