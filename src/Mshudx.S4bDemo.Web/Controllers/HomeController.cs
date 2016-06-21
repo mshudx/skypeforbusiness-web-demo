@@ -19,6 +19,11 @@ namespace Mshudx.S4bDemo.Web.Controllers
             return View();
         }
 
+        public IActionResult AnonymousJoin()
+        {
+            return View();
+        }
+
         [Authorize]
         public IActionResult CreateConferenceCall()
         {
