@@ -1,0 +1,58 @@
+﻿<div>
+    <h3>Create a conference call</h3>
+    <input id="startNewChatMeeting" class="btn btn-primary" value="Start a new chat meeting" />
+    <input id="startNewAudioMeeting" class="btn btn-primary" value="Start a new audio meeting" />
+    <input id="startNewVideoMeeting" class="btn btn-primary" value="Start a new video meeting" />
+    <div class="input-group">
+        <span id="newMeetingUriDescription" class="input-group-addon">Meeting URI</span>
+        <input id="newMeetingUri" class="form-control" placeholder="" aria-describedby="newMeetingUriDescription" readonly />
+    </div>
+    <div class="c-add-p-container hide">
+        <span id="btn-add-contact" class="iconfont contactAdd"></span>
+        <div class="add-p-container hide">
+            <input type="text" id="txt-contact" placeholder="sip:someone@example.com" />
+            <div id="btn-add-participant" class="iconfont addp-ok"></div>
+        </div>
+    </div>
+</div>
+<div class="device-manager">
+    <h2>Device Manager</h2>
+    <h3>Speakers:</h3>
+    <select id="spks"></select>
+    <h3>Audio Devices:</h3>
+    <select id="mics"></select>
+    <h3>Cameras:</h3>
+    <select id="cams"></select>
+</div>
+<div>
+    <h3>Manage Video</h3>
+    <div id="showRemoteVideoInMeeting" class="button">Show remote video in meeting</div>
+    <div id="removeRemoteVideoInMeeting" class="button">Remove remote video in meeting</div>
+</div>
+<div class="conversation">
+    <div class="header">
+        <h3>Conference Video</h3>
+    </div>
+    <div class="av-container">
+        <div id="renderWindow" class="render-window"></div>
+    </div>
+</div>
+<div class="conversation">
+    <div class="header">
+        <h3>Self Camera</h3>
+    </div>
+    <div id="av-self" class="av-container">
+        <div id="previewWindow" class="render-window"></div>
+    </div>
+</div>
+<div id="message-history" class="messages"></div>
+<div id="input-message" class="chatinput editable" contenteditable="true" placeholder="Type a message here" style="display: none;"></div>
+
+@section scripts {
+    <environment names="Development">
+        <script src="~/js/skype-conference-create.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/js/skype-conference-create.min.js" asp-append-version="true"></script>
+    </environment>
+}
