@@ -26,9 +26,6 @@ $(function () {
         client.signInManager.signIn({
             version: config.version,
             name: $('#name').val(),
-            origins: ["https://webdir.online.lync.com/autodiscover/autodiscoverservice.svc/root"],
-            cors: true,
-            redirect_uri: config.redirect_uri, // Can be any location in the current site. (Any valid Url)
             meeting: $('#meetingUri').val()
         }).then(function () {
             console.log('Signed in as: ' + client.personsAndGroupsManager.mePerson.displayName());
