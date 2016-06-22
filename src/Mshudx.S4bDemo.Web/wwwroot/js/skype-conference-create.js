@@ -1,6 +1,5 @@
 ﻿var client;
 var registeredListeners = registeredListeners || [];
-var lblDevices = $('<div class="status">').appendTo($('.device-manager'));
 
 $(function () {
     'use strict';
@@ -22,11 +21,11 @@ $(function () {
             console.log(state);
         });
         client.signInManager.signIn({
-            "client_id": config.client_id, //GUID obtained from Azure app registration.
-            "origins": ["https://webdir.online.lync.com/autodiscover/autodiscoverservice.svc/root"],
-            "cors": true,
-            "redirect_uri": config.redirect_uri, // Can be any location in the current site. (Any valid Url)
-            "version": config.version
+            client_id: config.client_id, //GUID obtained from Azure app registration.
+            origins: ["https://webdir.online.lync.com/autodiscover/autodiscoverservice.svc/root"],
+            cors: true,
+            redirect_uri: config.redirect_uri, // Can be any location in the current site. (Any valid Url)
+            version: config.version
         }).then(function () {
             setupDeviceManager();
             clearExistingConversations();
@@ -45,54 +44,52 @@ $(function () {
         client.devicesManager.cameras.subscribe();
         // observe .speakers
         client.devicesManager.speakers.added(function (ad) {
-            lblDevices.append($('<div>').text('Added speaker: ' + ad().value.id()));
+            console.log('Added speaker: ' + ad().value.id());
             $('#spks').append($('<option/>', {
                 value: ad().value.id(),
                 text: ad().value.id()
             }));
         });
         client.devicesManager.speakers.removed(function (ad) {
-            lblDevices.append($('<div>').text('Removed speaker: ' + ad.id()));
+            console.log('Removed speaker: ' + ad.id());
             $('#spks option[value="' + ad.id() + '"]')[0].remove();
         });
         // observe .microphones
         client.devicesManager.microphones.added(function (ad) {
-            lblDevices.append($('<div>').text('Added mic: ' + ad.id()));
+            console.log('Added mic: ' + ad.id());
             $('#mics').append($('<option/>', {
                 value: ad.id(),
                 text: ad.id()
             }));
         });
         client.devicesManager.microphones.removed(function (ad) {
-            lblDevices.append($('<div>').text('Removed mic: ' + ad.id()));
+            console.log('Removed mic: ' + ad.id());
             $('#mics option[value="' + ad.id() + '"]')[0].remove();
         });
         // observe .cameras
         client.devicesManager.cameras.added(function (vd) {
-            lblDevices.append($('<div>').text('Added camera: ' + vd.name()));
+            console.log('Added camera: ' + vd.name());
             $('#cams').append($('<option/>', {
                 value: vd.name(),
                 text: vd.name()
             }));
         });
         client.devicesManager.cameras.removed(function (vd) {
-            lblDevices.append($('<div>').text('Removed camera: ' + vd.name()));
+            console.log('Removed camera: ' + vd.name());
             $('#cams option[value="' + vd.name() + '"]')[0].remove();
         });
         // observe .selected*
         client.devicesManager.selectedSpeaker.changed(function (ad) {
-            lblDevices.append($('<div>').text('Selected speaker: ' +
-                (ad ? ad.value.id() : 'None')));
+            console.log('Selected speaker: ' + (ad ? ad.value.id() : 'None'));
         });
         client.devicesManager.selectedMicrophone.changed(function (ad) {
-            lblDevices.append($('<div>').text('Selected microphone: ' +
-                (ad ? ad.id() : 'None')));
+            console.log('Selected microphone: ' + (ad ? ad.id() : 'None'));
         });
         client.devicesManager.selectedCamera.changed(function (vd) {
-            lblDevices.append($('<div>').text('Selected video: ' +
-                (vd ? vd.name() : 'None')));
+            console.log('Selected video: ' + (vd ? vd.name() : 'None'));
         });
     }
+
     function clearExistingConversations() {
         client.conversationsManager.conversations.get().then(function (conversationsArray) {
             if (conversationsArray && conversationsArray.length > 0) {
@@ -220,76 +217,21 @@ $(function () {
         $(".av-controls").show();
         $(".add-p-container").hide();
     });
-    // join an online meeting and start chat
-    $('#startChatMeeting').click(function () {
-        var uri = $('#meetingUri').text(), conv, dfd;
-        conv = client.conversationsManager.getConversationByUri(uri);
-        dfd = conv.chatService.start().then(function () {
-            conv.chatService.sendMessage('Hi');
-        });
-    });
-    // join an online meeting and start audio
-    $('#startAudioMeeting').click(function () {
-        var uri = $('#meetingUri').text(), conv, dfd;
-        conv = client.conversationsManager.getConversationByUri(uri);
-        dfd = conv.audioService.start();
-    });
-    // join an online meeting and start video
-    $('#startVideoMeeting').click(function () {
-        var uri = $('#meetingUri').text(), conv, dfd;
+    // join an existing online meeting
+    $('#joinExistingVideoMeeting').click(function () {
+        var uri = $('#meetingUri').val(), conv, dfd;
         conv = client.conversationsManager.getConversationByUri(uri);
         dfd = conv.videoService.start();
     });
-    // start an online meeting and start chat
-    $('#startNewChatMeeting').click(function () {
-        var conv, dfd, meetingUri;
-        conv = client.conversationsManager.createConversation();
-        $('#newMeetingUri').val("");
-        dfd = conv.chatService.start().then(function () {
-            meetingUri = conv.uri();
-            $('#newMeetingUri').val(meetingUri);
-            $(".c-add-p-container").removeClass('hide');
-        });
-    });
-    // start an online meeting and start audio
-    $('#startNewAudioMeeting').click(function () {
-        var conv, dfd, meetingUri;
-        conv = client.conversationsManager.createConversation();
-        $('#newMeetingUri').val("");
-        dfd = conv.audioService.start().then(function () {
-            meetingUri = conv.uri();
-            $('#newMeetingUri').val(meetingUri);
-            $(".c-add-p-container").removeClass('hide');
-        });
-    });
-    // start an online meeting and start video
+    // start a new online meeting
     $('#startNewVideoMeeting').click(function () {
         var conv, dfd, meetingUri;
         conv = client.conversationsManager.createConversation();
-        $('#newMeetingUri').val("");
+        $('#meetingUri').val("");
         dfd = conv.videoService.start().then(function () {
             meetingUri = conv.uri();
-            $('#newMeetingUri').val(meetingUri);
+            $('#meetingUri').val(meetingUri);
             $(".c-add-p-container").removeClass('hide');
         });
-    });
-    // start video
-    $('#showRemoteVideoInMeeting').click(function () {
-        var conv, channel, dfd;
-        if (client.conversationsManager.conversations.size() == 1) {
-            conv = client.conversationsManager.conversations(0);
-            channel = conv.participants(0).video.channels(0);
-            channel.stream.source.sink.container(document.getElementById('renderWindow'));
-            dfd = channel.isStarted.set(true);
-        }
-    });
-    // start video
-    $('#removeRemoteVideoInMeeting').click(function () {
-        var conv, channel, dfd;
-        if (client.conversationsManager.conversations.size() == 1) {
-            conv = client.conversationsManager.conversations(0);
-            channel = conv.participants(0).video.channels(0);
-            dfd = channel.isStarted.set(false);
-        }
     });
 });

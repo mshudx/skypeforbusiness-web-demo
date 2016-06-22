@@ -26,10 +26,16 @@ $(function () {
         client.signInManager.signIn({
             version: config.version,
             name: $('#name').val(),
+            origins: ["https://webdir.online.lync.com/autodiscover/autodiscoverservice.svc/root"],
+            cors: true,
+            redirect_uri: config.redirect_uri, // Can be any location in the current site. (Any valid Url)
             meeting: $('#meetingUri').val()
         }).then(function () {
             console.log('Signed in as: ' + client.personsAndGroupsManager.mePerson.displayName());
             $("#sign-in").addClass("disable");
+            //Create a conversation object for this conference:
+            //var conversation = application.conversationsManager.getConversationByUri(uri);
+
             var addedListener = client.conversationsManager.conversations.added(function (conversation) {
                 var chatService, audioService, videoService;
                 chatService = conversation.chatService;

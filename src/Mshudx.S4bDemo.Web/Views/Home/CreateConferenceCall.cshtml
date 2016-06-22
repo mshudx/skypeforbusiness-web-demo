@@ -1,52 +1,108 @@
-﻿<div>
-    <h3>Create a conference call</h3>
-    <input id="startNewChatMeeting" class="btn btn-primary" value="Start a new chat meeting" />
-    <input id="startNewAudioMeeting" class="btn btn-primary" value="Start a new audio meeting" />
-    <input id="startNewVideoMeeting" class="btn btn-primary" value="Start a new video meeting" />
-    <div class="input-group">
-        <span id="newMeetingUriDescription" class="input-group-addon">Meeting URI</span>
-        <input id="newMeetingUri" class="form-control" placeholder="" aria-describedby="newMeetingUriDescription" readonly />
-    </div>
-    <div class="c-add-p-container hide">
-        <span id="btn-add-contact" class="iconfont contactAdd"></span>
-        <div class="add-p-container hide">
-            <input type="text" id="txt-contact" placeholder="sip:someone@example.com" />
-            <div id="btn-add-participant" class="iconfont addp-ok"></div>
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Conference
+                </div>
+                <div class="panel-body">
+                    <input id="startNewVideoMeeting" class="btn btn-primary" value="Start a new video meeting" />
+                    <input id="joinExistingVideoMeeting" class="btn btn-primary" value="Join existing video meeting" />
+                    <div class="input-group">
+                        <span id="newMeetingUriDescription" class="input-group-addon">Meeting URI</span>
+                        <input id="meetingUri" class="form-control" placeholder="no active meeting" aria-describedby="newMeetingUriDescription" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Device Manager
+                </div>
+                <div class="panel-body">
+                    <div class="device-manager">
+                        <div class="input-group">
+                            <span id="spksDescription" class="input-group-addon">Speakers:</span>
+                            <select id="spks" class="form-control" placeholder="" aria-describedby="spksDescription"></select>
+                        </div>
+                        <div class="input-group">
+                            <span id="micsDescription" class="input-group-addon">Microphones:</span>
+                            <select id="mics" class="form-control" placeholder="" aria-describedby="micsDescription"></select>
+                        </div>
+                        <div class="input-group">
+                            <span id="camsDescription" class="input-group-addon">Cameras:</span>
+                            <select id="cams" class="form-control" placeholder="" aria-describedby="camsDescription"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Conference Video
+                        </div>
+                        <div class="panel-body">
+                            <div class="conversation">
+                                <div class="av-container">
+                                    <div id="renderWindow" class="render-window"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Self
+                        </div>
+                        <div class="panel-body">
+                            <div class="conversation">
+                                <div id="av-self" class="av-container">
+                                    <div id="previewWindow" class="render-window"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Chat
+                        </div>
+                        <div class="panel-body">
+                            <div id="message-history" class="messages"></div>
+                            <div class="input-group">
+                                <span id="input-messageDescription" class="input-group-addon">Cameras:</span>
+                                <input id="input-message" type="text" class="chatinput form-control" placeholder="..." aria-describedby="input-messageDescription" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Invite to conversation
+                </div>
+                <div class="panel-body">
+                    <div class="c-add-p-container hide">
+                        <span id="btn-add-contact" class="iconfont contactAdd"></span>
+                        <div class="add-p-container hide">
+                            <input type="text" id="txt-contact" placeholder="sip:someone@example.com" />
+                            <div id="btn-add-participant" class="iconfont addp-ok"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="device-manager">
-    <h2>Device Manager</h2>
-    <h3>Speakers:</h3>
-    <select id="spks"></select>
-    <h3>Audio Devices:</h3>
-    <select id="mics"></select>
-    <h3>Cameras:</h3>
-    <select id="cams"></select>
-</div>
-<div>
-    <h3>Manage Video</h3>
-    <div id="showRemoteVideoInMeeting" class="button">Show remote video in meeting</div>
-    <div id="removeRemoteVideoInMeeting" class="button">Remove remote video in meeting</div>
-</div>
-<div class="conversation">
-    <div class="header">
-        <h3>Conference Video</h3>
-    </div>
-    <div class="av-container">
-        <div id="renderWindow" class="render-window"></div>
-    </div>
-</div>
-<div class="conversation">
-    <div class="header">
-        <h3>Self Camera</h3>
-    </div>
-    <div id="av-self" class="av-container">
-        <div id="previewWindow" class="render-window"></div>
-    </div>
-</div>
-<div id="message-history" class="messages"></div>
-<div id="input-message" class="chatinput editable" contenteditable="true" placeholder="Type a message here" style="display: none;"></div>
+
 
 @section scripts {
     <environment names="Development">

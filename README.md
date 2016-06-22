@@ -1,5 +1,5 @@
 # About
-This sample ASP.NET Core Web App shows how to develop a Skype Web SDK client application for Skype for Business Online.
+This sample ASP.NET Core Web App shows how to develop a [Skype Web SDK](https://msdn.microsoft.com/en-us/skype/websdk/generalreference) client application for Skype for Business Online.
 
 # Currently supported browsers
 
@@ -37,6 +37,8 @@ To run this sample you will need:
 5. Replace the value of the `Authentication:AzureAd:AADInstance` setting with your Azure AD Tenant's domain name e.g. `contoso.onmicrosoft.com`
 6. Set the value of `SkypeForBusiness:Version` to a specific value to your app, eg. `s4bdemo/0.0.1`
 7. Set the Skype Web SDK API keys
+
+> Alternatively you can save your sensitive configuration values to `secrets.json` file which is ignored by `.gitignore`.
 
 # Skype Web SDK Production Use Capabilities & API keys
 For the API product keys and the supported capabilitites please check the [Official documentation](https://msdn.microsoft.com/en-us/skype/websdk/apiproductkeys).

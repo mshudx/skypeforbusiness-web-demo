@@ -1,1 +1,23 @@
-﻿
+﻿@section scripts {
+<script>
+    $(function () {
+        Skype.initialize({ apiKey: 'a42fcebd-5b43-4b89-a065-74450fb91255' }, api => {
+            var app = new api.application;
+
+            app.signInManager.signIn({
+                name: 'Guest',
+                meeting: 'sip:alexd@mod357285.onmicrosoft.com;gruu;opaque=app:conf:focus:id:DSD7F9ZJ',
+                cors: true,
+                redirect_uri: config.redirect_uri, // Can be any location in the current site. (Any valid Url)
+                origins: ["https://webdir.online.lync.com/autodiscover/autodiscoverservice.svc/root"]
+            }).then(() => {
+                console.log("signed in as", app.personsAndGroupsManager.mePerson.displayName());
+            }, err => {
+                console.log("cannot sign in", err);
+            });
+        }, err => {
+            console.log("cannot load the sdk package", err);
+        });
+    });
+</script>
+}
