@@ -1,6 +1,8 @@
 # About
 This sample ASP.NET Core Web App shows how to develop a [Skype Web SDK](https://msdn.microsoft.com/en-us/skype/websdk/generalreference) client application for Skype for Business Online.
 
+[![Twitter Follow](https://img.shields.io/twitter/follow/shields_io.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/ersekattila)
+
 # Currently supported browsers
 
 * IE 10+ (Skype for Business Onprem)
@@ -21,12 +23,12 @@ To run this sample you will need:
 
 ## Step-by-step guide
 
-[ ] Fork and clone or download this repository
-[ ] Obtain API key from the official documentation
-[ ] Register your APP in Azure AD 
-[ ] Configure your app for OAuth implicit grant flow
-[ ] Provide consent for all users in the Azure AD tenant
-[ ] Configure your application
+- [ ] Fork and clone or download this repository
+- [ ] Obtain API key from the official documentation
+- [ ] Register your APP in Azure AD 
+- [ ] Configure your app for OAuth implicit grant flow
+- [ ] Provide consent for all users in the Azure AD tenant
+- [ ] Configure your application
 
 # Configure the application
 
