@@ -1,8 +1,9 @@
 # About
 This sample ASP.NET Core Web App shows how to develop a [Skype Web SDK](https://msdn.microsoft.com/en-us/skype/websdk/generalreference) client application for Skype for Business Online.
 
-[![Twitter Follow](https://img.shields.io/twitter/follow/shields_io.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/ersekattila)
 [![Build status](https://ci.appveyor.com/api/projects/status/i0j9jo8sk1vf1sew?svg=true)](https://ci.appveyor.com/project/retk/skypeforbusiness-web-demo)
+[![Gitter](https://badges.gitter.im/mshudx/skypeforbusiness-web-demo.svg)](https://gitter.im/mshudx/skypeforbusiness-web-demo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Twitter Follow](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&maxAge=2592000&label=Follow%20%40ersekattila)](https://twitter.com/ersekattila)
 
 # Currently supported browsers
 
