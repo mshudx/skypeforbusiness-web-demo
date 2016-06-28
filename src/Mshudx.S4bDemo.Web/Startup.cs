@@ -87,7 +87,7 @@ namespace Mshudx.S4bDemo.Web
                 ClientSecret = Configuration["Authentication:AzureAd:ClientSecret"],
                 Authority = string.Format(Configuration["Authentication:AzureAd:AadInstance"], Configuration["Authentication:AzureAd:Tenant"]),
                 PostLogoutRedirectUri = Configuration["Authentication:AzureAd:PostLogoutRedirectUri"],
-                ResponseType = OpenIdConnectResponseTypes.IdToken,
+                ResponseType = OpenIdConnectResponseType.IdToken,
 
                 TokenValidationParameters = new TokenValidationParameters
                 {
