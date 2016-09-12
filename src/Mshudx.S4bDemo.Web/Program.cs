@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
@@ -12,14 +8,14 @@ namespace Mshudx.S4bDemo.Web
     {
         public static void Main(string[] args)
         {
-            var builder = new ConfigurationBuilder();
-            builder.AddCommandLine(args);
-
-            var configuration = builder.Build();
+            var configuration = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
+                .Build();
 
             var host = new WebHostBuilder()
-                .UseKestrel()
                 .UseConfiguration(configuration)
+                .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
