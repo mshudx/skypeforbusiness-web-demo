@@ -28,8 +28,55 @@ $(function () {
             version: config.version
         }).then(function () {
             setupDeviceManager();
-            setupConversationManager();
-            client.conversationsManager.createConversation();
+            var conv = client.conversationsManager.createConversation();
+            var addedListener = client.conversationsManager.conversations.added(function (conversation) {
+                var chatService, audioService, videoService;
+                chatService = conversation.chatService;
+                audioService = conversation.audioService;
+                videoService = conversation.videoService;
+                conversation.videoService.start().then(function () {
+                    console.log("video started");
+                    $('#meetingUri').val(conversation.uri());
+                    $('#inviteUrl').val("http://localhost:5000/home/joinwithtoken?conv=" + encodeURIComponent(conversation.uri()));
+                });
+                // participant audio and video state changes
+                conversation.participants.added(function (p) {
+                    p.video.state.changed(function (newState, reason, oldState) {
+                        onChanged('_participant.video.state', newState, reason, oldState);
+                        // a convenient place to set the video stream container
+                        if (newState === 'Connected') {
+                            p.video.channels(0).stream.state.changed(function (ns, r, os) {
+                                onChanged('_participant.video.channels(0).stream.state', ns, r, os);
+                            });
+                            // setTimeout is a workaround
+                            setTimeout(function () {
+                                p.video.channels(0).stream.source.sink.container.set(document.getElementById("renderWindow")).then(function () {
+                                    setTimeout(function () {
+                                        p.video.channels(0).isStarted(true);
+                                    }, 0);
+                                });
+                            }, 6000);
+                        }
+                    });
+                    p.audio.state.changed(function (newState, reason, oldState) {
+                        onChanged('_participant.audio.state', newState, reason, oldState);
+                    });
+                });
+                conversation.selfParticipant.audio.state.changed(function (newState, reason, oldState) {
+                    onChanged('selfParticipant.audio.state', newState, reason, oldState);
+                });
+                conversation.selfParticipant.video.state.changed(function (newState, reason, oldState) {
+                    var selfChannel;
+                    onChanged('selfParticipant.video.state', newState, reason, oldState);
+                    if (newState === 'Connected') {
+                        // ...or even here
+                        selfChannel = conversation.selfParticipant.video.channels(0);
+                        selfChannel.stream.source.sink.container.set(document.getElementById("previewWindow")).then(function () {
+                            selfChannel.isStarted(true);
+                        });
+                    }
+                });
+            });
         });
 
     }, function (err) {
