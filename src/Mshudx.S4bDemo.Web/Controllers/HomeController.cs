@@ -24,11 +24,7 @@ namespace Mshudx.S4bDemo.Web.Controllers
             return View();
         }
 
-        public IActionResult Error()
-        {
-            return View();
-        }
-
+        [Authorize]
         public IActionResult JoinWithToken(string conv)
         {
             ViewData["meetingUri"] = conv;
