@@ -14,7 +14,7 @@ $(function () {
         console.log(err);
         alert('Cannot load the SDK.');
     });
-    $('#name, #meetingUri').keypress(function (evt) {
+    $('#meetingUri').keypress(function (evt) {
         if (evt.keyCode === 13) {
             evt.preventDefault();
             $("#signin").click();
@@ -24,11 +24,12 @@ $(function () {
     $('#signin').click(function () {
         // SignIn as anonymous user using conference URI
         client.signInManager.signIn({
-            "version": config.version,
-            "name": $('#name').val(),
-            "origins": ["https://webdir.online.lync.com/autodiscover/autodiscoverservice.svc/root"],
-            "meeting": $('#meetingUri').val(),
-            "cors": true
+          auth: function (req, send) {
+              req.headers['Authorization'] = 'Bearer cwt=' + $('#accessToken').val();
+              return send(req);
+          },
+          cors: true,
+          domain: $('#domain').val()
         }).then(function () {
             console.log('Signed in as: ' + client.personsAndGroupsManager.mePerson.displayName());
             $("#sign-in").addClass("disable");
