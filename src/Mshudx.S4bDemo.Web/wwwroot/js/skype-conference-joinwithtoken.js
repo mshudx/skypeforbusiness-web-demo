@@ -29,7 +29,9 @@ $(function () {
         }).then(function () {
             setupDeviceManager();
             setupConversationManager();
-            client.conversationsManager.createConversation();
+            var uri = $('#meetingUri').val();
+            conv = client.conversationsManager.getConversationByUri(uri);
+            dfd = conv.videoService.start();
         });
 
     }, function (err) {

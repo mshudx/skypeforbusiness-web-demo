@@ -29,6 +29,12 @@ namespace Mshudx.S4bDemo.Web.Controllers
             return View();
         }
 
+        public IActionResult JoinWithToken(string conv)
+        {
+            ViewData["meetingUri"] = conv;
+            return View();
+        }
+
         public async Task<IActionResult> PasswordJoin()
         {
             string authority = String.Format(CultureInfo.InvariantCulture, "https://login.microsoftonline.com/{0}", "MOD956047.onmicrosoft.com");

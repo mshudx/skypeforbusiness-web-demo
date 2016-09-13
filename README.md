@@ -14,6 +14,8 @@ This sample ASP.NET Core Web App shows how to develop a [Skype Web SDK](https://
 * Chrome 43+ (non Audio Video functionality)
 * Microsoft Edge
 
+> Please note, that IE and Safari requires a plugin to function properly.
+
 # How-to setup your dev environment
 To run this sample you will need:
 
@@ -90,7 +92,7 @@ Access the URL and authenticate using **tenant administrator credentials** and *
 2. Open `appsettings.json` file
 3. Find the `Authentication:AzureAd:ClientId` and replace the value with the **CLIENT ID** from the [Azure portal Active Directory extension](https://manage.windowsazure.com/@scaleddomains.com#Workspaces/ActiveDirectoryExtension).
 4. Find the `Authentication:AzureAd:ClientSecret` and replace the value with a key created for the application in the Azure AD tenant. Under the Keys section, select either a 1 year or 2 year key - the keyValue will be displayed after you save the configuration at the end.
-5. Replace the value of the `Authentication:AzureAd:AADInstance` setting with your Azure AD Tenant's domain name e.g. `contoso.onmicrosoft.com`
+5. Replace the value of the `Authentication:AzureAd:Tenant` setting with your Azure AD Tenant's domain name e.g. `contoso.onmicrosoft.com`
 6. Set the value of `SkypeForBusiness:Version` to a specific value to your app, eg. `s4bdemo/0.0.1`
 7. Set the Skype Web SDK API keys
 
@@ -114,4 +116,4 @@ Access the URL and authenticate using **tenant administrator credentials** and *
 2. Select **Browse with**
 3. Click on **Add**
 4. Add **Internet Explorer** from `C:\Program Files\Internet Explorer\iexplore.exe`
-5. Then add `--incognito` as command line switch and name the browser something like "Internet Explorer - Private."
+5. Then add `-private` as command line switch and name the browser something like "Internet Explorer - Private."

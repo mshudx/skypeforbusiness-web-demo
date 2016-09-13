@@ -8,13 +8,7 @@
                 <div class="panel-body">
                     <div class="input-group">
                         <span id="newMeetingUriDescription" class="input-group-addon">Meeting URI</span>
-                        <input id="meetingUri" class="form-control" placeholder="no active meeting" aria-describedby="newMeetingUriDescription" readonly />
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="input-group">
-                        <span id="inviteUrlDescription" class="input-group-addon">Invite URL</span>
-                        <input id="inviteUrl" class="form-control" placeholder="" aria-describedby="inviteUrlDescription" readonly />
+                        <input id="meetingUri" class="form-control" placeholder="no active meeting" value="@ViewData["meetingUri"]" aria-describedby="newMeetingUriDescription" readonly />
                     </div>
                 </div>
             </div>
@@ -72,31 +66,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Invite to conversation
-                </div>
-                <div class="panel-body">
-                    <div class="c-add-p-container hide">
-                        <span id="btn-add-contact" class="iconfont contactAdd"></span>
-                        <div class="add-p-container hide">
-                            <input type="text" id="txt-contact" placeholder="sip:someone@example.com" />
-                            <div id="btn-add-participant" class="iconfont addp-ok"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
 
 @section scripts {
     <environment names="Development">
-        <script src="~/js/skype-conference-create.js" asp-append-version="true"></script>
+        <script src="~/js/skype-conference-joinwithtoken.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
-        <script src="~/js/skype-conference-create.min.js" asp-append-version="true"></script>
+        <script src="~/js/skype-conference-joinwithtoken.min.js" asp-append-version="true"></script>
     </environment>
 }
